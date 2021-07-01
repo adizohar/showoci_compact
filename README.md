@@ -1,9 +1,7 @@
 ## showoci_compact - Oracle Cloud Infrastructure Compact Reporting Tool
 
 SHOWOCI Compact is a reporting tool which uses the Python SDK to extract list of resources from your tenant. 
-It covers 5 OCI Resources,  
-Authentication by User or Compute using instance principals, 
-Output is printer friendly, or JSON
+It covers 5 OCI Resources,  Authentication by User or Compute using instance principals,  Output is printer friendly, or JSON
 
 **DISCLAIMER – This is not an official Oracle application,  It should NOT be used for utilization calculation purposes, and rather OCI's official 
 [cost analysis](https://docs.oracle.com/en-us/iaas/Content/Billing/Concepts/costanalysisoverview.htm) 
