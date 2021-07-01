@@ -11,7 +11,7 @@ Output is printer friendly, or JSON
 [cost analysis](https://docs.oracle.com/en-us/iaas/Content/Billing/Concepts/costanalysisoverview.htm) 
 and [usage reports](https://docs.oracle.com/en-us/iaas/Content/Billing/Concepts/usagereportsoverview.htm) features should be used instead.**
 
-Full OCI Version relocated to external github account 
+Full showoci version moved to [external github account](https://github.com/adizohar/showoci)
 
 **Developed by Adi Zohar, 2018-2021**
 
