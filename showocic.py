@@ -8876,7 +8876,7 @@ def set_parser_arguments():
     parser.add_argument('-cpr', default="", dest='compart_recur', help='Filter by Comp Name Recursive')
     parser.add_argument('-cpath', default="", dest='compartpath', help='Filter by Compartment path ,(i.e. -cpath "Adi / Sub"')
     parser.add_argument('-tenantid', default="", dest='tenantid', help='Override confile file tenancy_id')
-    parser.add_argument('-cf', type=argparse.FileType('r'), dest='config', help="Config File (~/.oci/config)")
+    parser.add_argument('-cf', default="", dest='config', help="Config File (~/.oci/config)")
     parser.add_argument('-jf', type=argparse.FileType('w'), dest='joutfile', help="Output to file   (JSON format)")
     parser.add_argument('-js', action='store_true', default=False, dest='joutscr', help="Output to screen (JSON format)")
     parser.add_argument('-sjf', type=argparse.FileType('w'), dest='sjoutfile', help="Output to screen (nice format) and JSON File")
@@ -8929,9 +8929,6 @@ def set_service_extract_flags(cmd):
 
     if cmd.all or cmd.allnoiam or cmd.database:
         prm.read_database = True
-
-    if cmd.noroot:
-        prm.read_root_compartment = False
 
     if cmd.config:
         if cmd.config.name:

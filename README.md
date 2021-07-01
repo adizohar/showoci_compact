@@ -91,48 +91,30 @@ Please follow [Oracle Python SDK Documentation](https://github.com/oracle/oci-py
 ```
 
 ## Copy the Software
-Download the showoci*.py from this project  
+Download the showocic.py file from this project  
 
 Execute  
 
 ```
-$ ./showocic.py  
+$ python3 showocic.py  
 
-usage: showoci.py [-h] [-a] [-ani] [-an] [-api] [-b] [-c] [-cn] [-d] [-e] [-edge] [-f] [-fun] [-i] [-ic] [-isc] [-l] [-lq] [-m] [-n] [-o] [-paas] [-dataai] [-rm] [-s] [-sec]
-                  [-nobackups] [-so] [-mc] [-nr] [-ip] [-dt] [-t PROFILE] [-p PROXY] [-rg REGION] [-cp COMPART] [-cpr COMPART_RECUR] [-cpath COMPARTPATH] [-tenantid TENANTID]
-                  [-cf CONFIG] [-csv CSV] [-jf JOUTFILE] [-js] [-sjf SJOUTFILE] [-cachef SERVICEFILE] [-caches] [--version]
+usage: showocic.py [-h] [-a] [-ani] [-c] [-d] [-i] [-ic] [-n] [-mc] [-ip]
+                   [-dt] [-t PROFILE] [-p PROXY] [-rg REGION] [-cp COMPART]
+                   [-cpr COMPART_RECUR] [-cpath COMPARTPATH]
+                   [-tenantid TENANTID] [-cf CONFIG] [-jf JOUTFILE] [-js]
+                   [-sjf SJOUTFILE] [-cachef SERVICEFILE] [-caches]
+                   [--version]
 
 optional arguments:
   -h, --help           show this help message and exit
   -a                   Print All Resources
   -ani                 Print All Resources but identity
-  -an                  Print Announcements
-  -api                 Print API Gateways
-  -b                   Print Budgets
   -c                   Print Compute
-  -cn                  Print Containers
   -d                   Print Database
-  -e                   Print EMail
-  -edge                Print Edge, DNS Services and WAAS policies
-  -f                   Print File Storage
-  -fun                 Print Functions
   -i                   Print Identity
   -ic                  Print Identity Compartments only
-  -isc                 Skip Identity User Credential extract
-  -l                   Print Load Balancer
-  -lq                  Print Limits and Quotas
-  -m                   Print Monitoring, Notifications and Events
   -n                   Print Network
-  -o                   Print Object Storage
-  -paas                Print PaaS Platform Services - OIC OAC OCE
-  -dataai              Print - D.Science, D.Catalog, D.Flow, ODA and BDS
-  -rm                  Print Resource management
-  -s                   Print Streams
-  -sec                 Print Security and Logging
-  -nobackups           Do not process backups
-  -so                  Print Summary Only
   -mc                  exclude ManagedCompartmentForPaaS
-  -nr                  Not include root compartment
   -ip                  Use Instance Principals for Authentication
   -dt                  Use Delegation Token (Cloud shell)
   -t PROFILE           Config file section to use (tenancy profile)
@@ -143,7 +125,6 @@ optional arguments:
   -cpath COMPARTPATH   Filter by Compartment path ,(i.e. -cpath "Adi / Sub"
   -tenantid TENANTID   Override confile file tenancy_id
   -cf CONFIG           Config File (~/.oci/config)
-  -csv CSV             Output to CSV files, Input as file header
   -jf JOUTFILE         Output to file (JSON format)
   -js                  Output to screen (JSON format)
   -sjf SJOUTFILE       Output to screen (nice format) and JSON File
@@ -163,13 +144,16 @@ optional arguments:
 ############################################################
 #                        showoci.py                        #
 ############################################################
-Authentication : Config File
-Config File    : ~/.oci/config
-Config Profile : adi
-Version        : 19.4.2
-Date/Time      : 2019-04-03 00:00:04
-Comand Line    : -t adi -a
-OCI SDK Ver    : 2.2.1
+Author          : Adi Zohar
+Machine         : linuxwork (x86_64)
+Python Version  : 3.9.0
+Authentication  : Config File
+Config File     : ~/.oci/config
+Config Profile  : DEFAULT
+Date/Time       : 2021-07-01 07:24:05
+Comand Line     : -c
+Showoci Version : 21.07.13
+OCI SDK Version : 2.41.0
 
 ############################################################
 #                 Load OCI data to Memory                  #
@@ -211,15 +195,11 @@ Compute...
 --> Boot Volumes Attached    <-- ............ (146) - 5 sec
 --> Volumes Attached         <-- ............ (120) - 8 sec
 --> Vnics Attached           <-- ............ (146) - 22 sec
---> Instance Configurations  <-- ............ (0) - 1 sec
---> Instance Pools           <-- ............ (0) - 1 sec
 
 Block Storage...
 --> Block Volume Groups      <-- ............ (0) - 1 sec
 --> Boot Volumes             <-- ............ (157) - 13 sec
---> Boot Volumes Backups     <-- ............ (7) - 1 sec
 --> Block Volumes            <-- ............ (164) - 15 sec
---> Block Volumes Backups    <--  (344) - 1 sec
 
 Database...
 --> DB Systems               <-- ............ (3) - 17 sec
@@ -238,7 +218,7 @@ Extracting Identity
     Providers...
 
 Extracting Region us-ashburn-1
-    Compartment gse00015259 (root)...
+    Compartment tenant (root)...
     Compartment Adi...
     Compartment Adi / Dev...
     Compartment Adi / Dev / DevA...
@@ -250,7 +230,7 @@ Extracting Region us-ashburn-1
 ##########################################################################################
 #                                        Tenancy                                         #
 ##########################################################################################
-Name        - CUST
+Name        - tenant
 OCID        - ocid1.tenancy.oc1..aaaaaaaae5u57gqxs5qas5f33qnge63sdoi7s2ji6bk5slscblmxxxxxxx
 Home Region - IAD
 Subs Region - us-ashburn-1, us-phoenix-1
@@ -262,9 +242,6 @@ Subs Region - us-ashburn-1, us-phoenix-1
     Groups = Administrators 
 
 --> adi_ocicli
-    Groups = Administrators 
-
---> adi_terraform
     Groups = Administrators 
 
 ##############################
@@ -320,24 +297,6 @@ Compartment gse00000000 (root):
     Metadata  :https://idcs-7520d863a50f4e9ca469bxxxxxxxxxx.identity.oraclecloud.com
     Group Map :DemoUsers <-> demousers
     Group Map :OCI_Administrators <-> Administrators
-
-##############################
-#     Cost Tracking Tags     #
-##############################
---> Project.Billing
-    Desc      :Billing Cost
-    Created   :2019-04-03 12:38
-
-##############################
-#          Budgets           #
-##############################
---> DemoBudget for Compartment: Demo (MONTHLY)
-    Costs   : Spent: 0.0, Forcasted: 0.0 , Time Computed: 2019-04-17 17:45
-    Created : 2019-04-17 15:57, Total Alert Rules: 0
-
---> BudgetForAdiCompartment for Compartment: Adi (MONTHLY)
-    Costs   : Spent: 0.0, Forcasted: 0.0 , Time Computed: 2019-04-17 17:45
-    Created : 2019-04-17 13:29, Total Alert Rules: 2
 
 ##########################################################################################
 #                                  Region us-ashburn-1                                   #
@@ -547,7 +506,7 @@ Compartment gse00000000 (root):
 
 
 ##########################################################################################
-#                     Completed Successfully at 2019-04-05 08:15:16                      #
+#                          Completed Successfully at 2020-07-01                          #
 ##########################################################################################
 
 ```
